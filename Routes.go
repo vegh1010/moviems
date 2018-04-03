@@ -5,21 +5,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type RouteDescription struct {
-	Name         string `json:"name"`
-	Method       string `json:"method"`
-	Pattern      string `json:"pattern"`
-	Description  string `json:"description"`
-	AuthRequired bool   `json:"auth_required"`
-}
-
 type Route struct {
-	Name         string
-	Method       string
-	Pattern      string
-	Description  string
-	AuthRequired bool
-	HandlerFunc  http.HandlerFunc
+	Name                string
+	Method              string
+	Pattern             string
+	Description         string
+	AccessTokenRequired bool
+	HandlerFunc         http.HandlerFunc
 }
 
 func (self *Route) Output() (data RouteDescription) {
@@ -27,7 +19,7 @@ func (self *Route) Output() (data RouteDescription) {
 	data.Method = self.Method
 	data.Pattern = self.Pattern
 	data.Description = self.Description
-	data.AuthRequired = self.AuthRequired
+	data.AccessTokenRequired = self.AccessTokenRequired
 	return
 }
 

@@ -1,3 +1,5 @@
+//package tools provides tools required for moviems to create directories, create/write files, checking on environment
+//variables and a standard json output for api handlers
 package tools
 
 import (
@@ -8,6 +10,7 @@ import (
 	"net/url"
 )
 
+// RequestResult is used to format http request output
 type RequestResult struct {
 	ResponseBody []byte
 	StatusCode   int
@@ -16,6 +19,7 @@ type RequestResult struct {
 
 const APPLICATION_JSON = "application/json"
 
+// GetRequest API Get request
 func GetRequest(urlPath, accessToken string) (result RequestResult, err error) {
 	if accessToken == "" {
 		err = errors.New("Access Token Required")

@@ -8,7 +8,7 @@ import (
 //create a file in the specified folder
 func (d *Directory) CreateFile(folder, filename string) (err error) {
 	fmt.Println("Directory.CreateFile()")
-	_, err = tools.CreateFile(d.Path+"/"+folder, filename)
+	err = tools.CreateFile(d.Path+"/"+folder, filename)
 	if err != nil {
 		return
 	}

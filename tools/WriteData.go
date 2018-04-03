@@ -1,3 +1,5 @@
+//package tools provides tools required for moviems to create directories, create/write files, checking on environment
+//variables and a standard json output for api handlers
 package tools
 
 import (

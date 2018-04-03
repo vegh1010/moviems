@@ -22,7 +22,7 @@ func main() {
 	loggedRouter := handlers.LoggingHandler(os.Stdout, NewRouter(InitHandlers()))
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{
-
+			"127.0.0.1",
 		},
 		AllowedMethods:   []string{"POST", "GET", "PUT", "OPTIONS", "DELETE"},
 		AllowCredentials: true,

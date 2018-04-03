@@ -24,3 +24,11 @@ func (self *Handler) Help(w http.ResponseWriter, r *http.Request) {
 	output.Data = self.list
 	output.Print()
 }
+
+type RouteDescription struct {
+	Name                string `json:"name"`
+	Method              string `json:"method"`
+	Pattern             string `json:"pattern"`
+	Description         string `json:"description"`
+	AccessTokenRequired bool   `json:"access_token_required"`
+}
