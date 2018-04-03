@@ -5,7 +5,6 @@ import (
 	"github.com/vegh1010/moviems/tools"
 	"encoding/json"
 	"errors"
-	"github.com/vegh1010/moviems2/lib"
 )
 
 type MovieResult struct {

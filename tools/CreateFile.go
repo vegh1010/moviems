@@ -9,11 +9,10 @@ import (
  * Create File at specific path
  */
 func CreateFile(pathToDirectory, filename string) (filePath string, err error) {
-	// write to file
 	if pathToDirectory != "" && filename != "" {
-		if _, err = os.Stat(pathToDirectory); os.IsNotExist(err) {
-			//create directory if not exists
-			err = os.MkdirAll(pathToDirectory, os.ModePerm)
+		if _, err = os.Stat(pathToDirectory + "/" + filename); os.IsNotExist(err) {
+			//create file if not exists
+			_, err = os.Create(pathToDirectory+"/"+filename)
 			if err != nil {
 				return
 			}

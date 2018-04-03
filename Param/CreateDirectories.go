@@ -1,9 +1,13 @@
 package moviems_param
 
-import "github.com/vegh1010/moviems/tools"
+import (
+	"github.com/vegh1010/moviems/tools"
+	"fmt"
+)
 
 //create cinemaworld and filmworld folder
 func (p *Param) CreateDirectories() (err error) {
+	fmt.Println("Param.CreateDirectories()")
 	list := []string{
 		p.Path + "/" + p.CinemaWorld,
 		p.Path + "/" + p.FilmWorld,

@@ -11,8 +11,8 @@ func (d *Database) Get(from, id string) (data moviems_lib.MovieDetail, err error
 	var api moviems_api.MovieResult
 	err = api.Get(d.URL, from, id, d.AccessToken)
 	if err != nil {
-		if d.Directory.IsFileExist(from, from + ".json") {
-			err = d.Directory.ReadData(from, from + ".json", &data)
+		if d.Directory.IsFileExist(from, id + ".json") {
+			err = d.Directory.ReadData(from, id + ".json", &data)
 			if err != nil {
 				return
 			}

@@ -18,7 +18,7 @@ func (p *Param) Init() (err error) {
 	p.URL = os.Getenv("URL")
 	p.AccessToken = os.Getenv("ACCESS_TOKEN")
 
-	p.Path = "./"
+	p.Path = "cache"
 	p.CinemaWorld = "cinemaworld"
 	p.FilmWorld = "filmworld"
 
