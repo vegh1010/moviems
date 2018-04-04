@@ -9,7 +9,9 @@ import (
 // CreateDirectory will verify if directory does not exist then create directory at specified path
 // it returns an error if issue occurred
 func CreateDirectory(pathToDirectory string) error {
+	//check if directory exist
 	if _, err := os.Stat(pathToDirectory); os.IsNotExist(err) {
+		//create directory
 		os.MkdirAll(pathToDirectory, os.ModePerm)
 	} else if err != nil {
 		return err

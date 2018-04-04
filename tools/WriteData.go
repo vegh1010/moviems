@@ -7,17 +7,23 @@ import (
 	"encoding/json"
 )
 
+// WriteData will open a file and write the data into file after data is marshal via json and written to file as string
+// it returns error if issue occurred
 func WriteData(filePath string, data interface{}) error {
-	f, err := os.OpenFile(filePath, os.O_WRONLY, os.ModeAppend)
+	//open file
+	f, err := os.OpenFile(filePath, os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 
+	//marshal data
 	out, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
+
+	//write data to file
 	_, err = f.WriteString(string(out))
 	if err != nil {
 		return err

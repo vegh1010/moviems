@@ -9,8 +9,9 @@ import (
 // CreateFile will verify if file does not exist then create file at specified path
 // it returns an error if issue occurred
 func CreateFile(pathToDirectory, filename string) (err error) {
+	//check if file exist
 	if _, err = os.Stat(pathToDirectory + "/" + filename); os.IsNotExist(err) {
-		//create file if not exists
+		//create file
 		_, err = os.Create(pathToDirectory+"/"+filename)
 		if err != nil {
 			return

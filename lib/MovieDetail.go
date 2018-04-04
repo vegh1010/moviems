@@ -1,5 +1,7 @@
+// package moviems_lib is a moviems library which contains structs/functions related to moviems.
 package moviems_lib
 
+// MovieDetail struct used to get detailed information for a movie from api get specific movie by id
 type MovieDetail struct {
 	Title     string `json:"Title"`
 	Year      string `json:"Year"`

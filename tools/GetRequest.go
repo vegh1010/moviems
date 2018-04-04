@@ -19,18 +19,18 @@ type RequestResult struct {
 
 const APPLICATION_JSON = "application/json"
 
-// GetRequest API Get request
+// GetRequest will accept the url and access token to do a GET request on the specified url
+// it returns RequestResult of the http request info and error if an issue occurred
 func GetRequest(urlPath, accessToken string) (result RequestResult, err error) {
+	//validate access token
 	if accessToken == "" {
 		err = errors.New("Access Token Required")
 		return
 	}
 
-	var responseBody []byte
-	var statusCode int
-	var statusString string
 	dataBuffer := new(bytes.Buffer)
 
+	//format request url
 	requestUrl, err := url.ParseRequestURI(urlPath)
 	if err != nil {
 		err = errors.New("Invalid URL supplied. URL: " + urlPath + ". Error: " + err.Error())
@@ -59,16 +59,13 @@ func GetRequest(urlPath, accessToken string) (result RequestResult, err error) {
 	}
 	defer newResponse.Body.Close()
 
-	statusCode = newResponse.StatusCode
-	statusString = newResponse.Status
-	responseBody, err = ioutil.ReadAll(newResponse.Body)
+	//set values to RequestResult
+	result.StatusCode = newResponse.StatusCode
+	result.StatusString = newResponse.Status
+	result.ResponseBody, err = ioutil.ReadAll(newResponse.Body)
 	if err != nil {
 		return
 	}
-
-	result.StatusCode = statusCode
-	result.StatusString = statusString
-	result.ResponseBody = responseBody
 
 	return
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//Route struct contains information and referenced handler on routes
 type Route struct {
 	Name                string
 	Method              string
@@ -14,21 +15,24 @@ type Route struct {
 	HandlerFunc         http.HandlerFunc
 }
 
-func (self *Route) Output() (data RouteDescription) {
-	data.Name = self.Name
-	data.Method = self.Method
-	data.Pattern = self.Pattern
-	data.Description = self.Description
-	data.AccessTokenRequired = self.AccessTokenRequired
+//Route.Output() return RouteDescription
+func (r *Route) Output() (data RouteDescription) {
+	data.Name = r.Name
+	data.Method = r.Method
+	data.Pattern = r.Pattern
+	data.Description = r.Description
+	data.AccessTokenRequired = r.AccessTokenRequired
 	return
 }
 
+//Routes struct contains a list of Route
 type Routes struct {
 	list []Route
 }
 
-func (self *Routes) Add(Name, Method, Pattern, Description string, HandlerFunc http.HandlerFunc) {
-	self.list = append(self.list, Route{
+//Route.Add() add new routes information and referenced handler into list
+func (r *Routes) Add(Name, Method, Pattern, Description string, HandlerFunc http.HandlerFunc) {
+	r.list = append(r.list, Route{
 		Name,
 		Method,
 		Pattern,
@@ -38,8 +42,12 @@ func (self *Routes) Add(Name, Method, Pattern, Description string, HandlerFunc h
 	})
 }
 
+// NewRouter create mux.Router based on list of routes
+// return mux.Router
 func NewRouter(data Routes) *mux.Router {
+	//create help handler
 	var helpHandler Handler
+	//initialize help handler
 	helpHandler.Init(data.list)
 	helper := Route{
 		"Help",
@@ -49,13 +57,15 @@ func NewRouter(data Routes) *mux.Router {
 		false,
 		helpHandler.Help,
 	}
-
+	//added helper handler first to route
 	router := mux.NewRouter().StrictSlash(true)
 	router.
 		Methods(helper.Method).
 		Path(helper.Pattern).
 		Name(helper.Name).
 		Handler(helper.HandlerFunc)
+
+	//added the rest of the handlers
 	for _, route := range data.list {
 		router.
 			Methods(route.Method).

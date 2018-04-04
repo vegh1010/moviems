@@ -6,19 +6,25 @@ import (
 	"github.com/vegh1010/moviems/Handlers/FilmHandler"
 )
 
+//initialize all handlers
+//return Routes defined
 func InitHandlers() (Routes) {
 	var list Routes
 	var Param moviems_param.Param
 	var CinemaHandler moviems_cinema_handler.CinemaHandler
-	var FilmHandler moviems_file_handler.FilmHandler
+	var FilmHandler moviems_film_handler.FilmHandler
 
+	//initialize param
 	err := Param.Init()
 	check(err)
+
+	//pass param to handlers and initialize
 	CinemaHandler.Param = Param
 	CinemaHandler.Init()
 	FilmHandler.Param = Param
 	FilmHandler.Init()
 
+	//add routes information, pattern, description and reference handler's function
 	list.Add(
 		"CinemaHandler.List()",
 		"GET",
@@ -50,6 +56,7 @@ func InitHandlers() (Routes) {
 	return list
 }
 
+//check if err do panic on error
 func check(err error) {
 	if err != nil {
 		panic(err)
